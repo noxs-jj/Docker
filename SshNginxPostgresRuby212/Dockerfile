@@ -12,7 +12,7 @@ RUN locale-gen en_US.UTF-8 && echo 'LANG="en_US.UTF-8"' > /etc/default/locale
 RUN apt-get update ; apt-get install -y autoconf automake bison build-essential curl gawk git-core imagemagick libffi-dev libgdbm-dev libncurses5-dev libpq-dev libreadline6 libreadline6-dev libsqlite3-dev libssl-dev libtool libyaml-dev make nano nginx nodejs openssh-server openssl pkg-config postgresql postgresql-contrib sqlite3 wget zlib1g zlib1g-dev
 
 ## install RVM && ruby 2.1.2
-RUN command curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+RUN /bin/bash -l -c  "command curl -sSL https://rvm.io/mpapis.asc | gpg --import -"
 RUN \curl -sSL https://get.rvm.io | bash -s stable
 RUN /bin/bash -l -c "rvm requirements"
 RUN /bin/bash -l -c "rvm install 2.1.2"
