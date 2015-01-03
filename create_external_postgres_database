@@ -1,0 +1,50 @@
+When you start new docker with postgresql you want to preserve your database out od container, so to to this you must on physical server create a directory where database will be saved. This directory will be a VOLUME for docker under container, VOLUME WILL NOT BE SAVE ON DOCKER COMMIT.
+
+With this way you can move your database on other physical server and backup it easily move it or create .tar
+
+1-. CREATE DIRECTORY ON PHYSICAL SERVER
+
+	useradd webs
+	
+	mkdir /data
+	
+	chown -R webs:webs /data
+
+
+2-. RUN container and go on 'docker run -v="/data:/data" -i -t nectify/base:TAG bash'
+
+
+3-. ON CONTAINER do following	
+
+	cp /etc/postgresql/9.3/main/postgresql.conf /data/postgresql.conf
+
+	cp /etc/postgresql/9.3/main/pg_hba.conf /data/pg_hba.conf
+
+	sed -i '/^data_directory*/ s|/var/lib/postgresql/9.3/main|/data/main|' /data/postgresql.conf
+		
+	sed -i '/^hba_file*/ s|/etc/postgresql/9.3/main/pg_hba.conf|/data/pg_hba.conf|' /data/postgresql.conf
+		
+	mkdir -p /data/main
+		
+	chown postgres /data/*
+		
+	chmod 700 /data/main
+		
+	su postgres --command "/usr/lib/postgresql/9.3/bin/initdb -D /data/main"
+		
+	su postgres --command "/usr/lib/postgresql/9.3/bin/postgres -D /data/main -c config_file=/data/postgresql.conf" &
+		
+	su postgres --command 'createuser -P -d -r -s webs' (ENTER & ENTER for no password)
+		
+	su postgres --command 'createdb -O webs webs'
+		
+	su postgres --command '/usr/lib/postgresql/9.3/bin/pg_ctl --pgdata=/data/main stop'
+
+DONE
+
+
+Now when you lunch you container you set '-v /data:/data' on your script start or command launch write 
+
+	su postgres --command "/usr/lib/postgresql/9.3/bin/postgres -D /data/main -c config_file=/data/postgresql.conf" &
+
+You're container is started with postgresql in background and saved on container on /data and physical server /data as VOLUME

@@ -1,0 +1,85 @@
+# voir la liste de tout les containers qui tourne en tache de fond
+# -a affiche les container arreter
+# -l affiche en details (les ports de redirection par exemple)
+docker ps
+docker ps -l
+docker ps -a
+
+
+# Retirer une image docker de la machine 
+docker rmi ID_CONTAINER
+docker rmi -f ID_CONTAINER (force)
+
+
+# Stop tout les containers deja arreter et supprime leur name qui pourrait poser probleme
+docker rm -f $(docker ps -a -q)
+
+# Arreter tout les docker actif (ATTENTION a se que vous faites)
+docker rm -f $(docker ps -q)
+
+# supprime toute les images non taggue (ATTENTION a se que vous faites) <None> <None> dans se genre
+docker rmi -f $(docker images | grep "^<none>" | awk "{print $3}")
+
+
+# option
+-i ajout stdin stdout
+-t ajout tty
+-d lancer un container en tache de fon
+-dp [host]:[container] (possible multi export: -p 1337:80 -p 5000:500 -p ex:ex)
+- (A travailler, mode automatique a eviter) The -P flag is new and tells Docker to map any required network ports inside our container to our host. 
+
+
+# lancer un docker et entrer dedans
+docker run -t -i ubuntu:14.04 /bin/bash
+docker run -i -t a6b8f4e3eae3 bash
+
+
+# lancer container avec commande en tache de fond
+docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
+>return une string de 64 characteres (tout va bien le containers tourne tache de fond)
+
+
+# voir les logs des containers qui tournentn en tache de fond >return les logs de stdout
+docker logs CONTAINER ID || NAMES
+
+
+# stoper container (en tache de fond) >return le NAMES arreter (ID a utiliser pour commit)
+docker stop CONTAINER ID || NAMES
+
+
+# commit option
+-m="xxx" laisser un message (tout comme git)
+-a="yyy" author du message
+docker commit -m="message comment as git"	-a="author"		ID(find root@ID)	NAMEREPOSITORY:TAG
+docker commit -m="test vide v000010" 		-a="NoXsNoNo"	ac6a7498d970 		noxsnono/nectify-ruby-unicorn-nginx:v000010
+
+
+# lie un container a un autre
+--link name:alias  (application:base_de_donne)
+docker run -d -P --name web --link db:db training/webapp python app.py
+
+
+# monter un volume de donne
+-v dossier_local:dossier_conteneur (le tout en chemin absolue obligatoire)
+docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py
+
+
+# monter un volume de base de donne
+-v mount le volume dans le container
+--volume-from mount a partir du volume existant
+docker run -d -v /dbdata --name dbdata training/postgres			# le premier
+docker run -d --volumes-from dbdata --name db1 training/postgres	# le deuxieme
+docker run -d --volumes-from dbdata --name db2 training/postgres	# le troisieme
+
+
+# backup un data volume
+docker run --volumes-from [VOLUME] -v [dossier_local:dossier_container] [ID / repository] [tar cvf destination_dans_container dossier_a_compresser]
++ --volumes-from [VOLUME] #monte a partir de se volume
++ -v [dossier_local:dossier_container] #lie le dossier local avec le dossier dans le container
++ [ID / repository] #le container a lancer
++ [tar cvf destination_dans_container dossier_a_compresser] lance une compression du volume monte dans le repertoire lie, se qui aura pour consequence d ele dupliquer dans le dossier local du host
+ex: docker run --volumes-from dbdata -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
+
+
+# vider les caches au lancement de l'image
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
