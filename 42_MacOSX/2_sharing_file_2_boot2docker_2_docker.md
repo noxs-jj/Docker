@@ -21,4 +21,5 @@
 	boot2docker up (or start)
 
 
-####You must mount volume each launch of boot2docker, you can check 'launch_docker_shared.sh' to do your own script for launch boot2docker faster
+
+You must mount volume each launch of boot2docker, you can check 'launch_docker_shared.sh' to do your own script for launch boot2docker faster
