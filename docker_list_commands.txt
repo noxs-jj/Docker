@@ -20,7 +20,6 @@ docker rm -f $(docker ps -q)
 # supprime toute les images non taggue (ATTENTION a se que vous faites) <None> <None> dans se genre
 docker rmi -f $(docker images | grep "^<none>" | awk "{print $3}")
 
-
 # option
 -i ajout stdin stdout
 -t ajout tty
