@@ -1,0 +1,11 @@
+For exemple i use sharing folder following:
+	'/nfs/zfs-student-2/users/2013/jmoiroux/docker/data'
+	same as '~/docker/data'
+
+
+
+
+
+VBoxManage sharedfolder add boot2docker-vm -name data -hostpath ~/docker/data
+
+boot2docker ssh "sudo modprobe vboxsf && mkdir -v -p /home/docker/data && sudo mount -v -t vboxsf  -o uid=0,gid=0 data /home/docker/data"
