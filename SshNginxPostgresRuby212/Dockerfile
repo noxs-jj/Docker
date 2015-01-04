@@ -1,4 +1,4 @@
-## nectify/base:latest
+# Nginx PostgreSQL RVM-Ruby 2.1.2 ssh
 
 ## base image Ubuntu 14.04
 FROM ubuntu:14.04
