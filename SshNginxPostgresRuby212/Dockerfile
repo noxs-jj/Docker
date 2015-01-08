@@ -1,6 +1,6 @@
-# Nginx PostgreSQL RVM-Ruby 2.1.2 ssh
+# Nginx PostgreSQL RVM-Ruby 2.1.2 SSH
 
-## base image Ubuntu 14.04
+## Base image Ubuntu 14.04
 FROM ubuntu:14.04
 
 MAINTAINER Jean-Jacques MOIROUX <jjmoiroux@gmail.com>
@@ -9,7 +9,11 @@ MAINTAINER Jean-Jacques MOIROUX <jjmoiroux@gmail.com>
 RUN locale-gen en_US.UTF-8 && echo 'LANG="en_US.UTF-8"' > /etc/default/locale
 
 ## install following packets with auto accept
-RUN apt-get update ; apt-get install -y autoconf automake bison build-essential curl gawk git-core imagemagick libffi-dev libgdbm-dev libncurses5-dev libpq-dev libreadline6 libreadline6-dev libsqlite3-dev libssl-dev libtool libyaml-dev make nano nginx nodejs openssh-server openssl pkg-config postgresql postgresql-contrib sqlite3 wget zlib1g zlib1g-dev
+RUN apt-get update ; apt-get install -y autoconf automake bison \
+build-essential curl gawk git-core imagemagick libffi-dev libgdbm-dev \
+libncurses5-dev libpq-dev libreadline6 libreadline6-dev libsqlite3-dev \
+libssl-dev libtool libyaml-dev make nano nginx nodejs openssh-server \
+openssl pkg-config postgresql postgresql-contrib sqlite3 wget zlib1g zlib1g-dev
 
 ## install RVM && ruby 2.1.2
 RUN /bin/bash -l -c  "command curl -sSL https://rvm.io/mpapis.asc | gpg --import -"
