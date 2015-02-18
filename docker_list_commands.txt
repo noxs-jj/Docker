@@ -1,3 +1,8 @@
+mkdir -p ~/Shared
+VBoxManage sharedfolder add boot2docker-vm --name "Shared" --hostpath ~/Shared
+echo 'sudo mount -t vboxsf Shared /media/root/sf_Shared' | boot2docker ssh
+^^^^^ Sharing on Mac with Boot2docker
+
 # voir la liste de tout les containers qui tourne en tache de fond
 # -a affiche les container arreter
 # -l affiche en details (les ports de redirection par exemple)
