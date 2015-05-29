@@ -15,4 +15,4 @@ ADD addfile/nginx/project /etc/nginx/site-enable/
 RUN mkdir /var/www ; chmod 777 /var/www
 
 ## Expose http port
-EXPOSE 80
+EXPOSE 80 6379 7379
