@@ -1,0 +1,1 @@
+docker build --tag="noxsnono/nginx_webdis:v00001" .
