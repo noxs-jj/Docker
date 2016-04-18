@@ -1,4 +1,4 @@
-# Nginx PostgreSQL RVM-Ruby 2.1.2 SSH
+# Nginx PostgreSQL RVM-Ruby 2.3.0 SSH
 
 ## Base image Ubuntu 14.04
 FROM ubuntu:14.04
@@ -15,13 +15,13 @@ libncurses5-dev libpq-dev libreadline6 libreadline6-dev libsqlite3-dev \
 libssl-dev libtool libyaml-dev make nano nginx nodejs openssh-server \
 openssl pkg-config postgresql postgresql-contrib sqlite3 wget zlib1g zlib1g-dev
 
-## install RVM && ruby 2.1.2
+## install RVM && ruby 2.3.0
 RUN /bin/bash -l -c  "command curl -sSL https://rvm.io/mpapis.asc | gpg --import -"
 RUN \curl -sSL https://get.rvm.io | bash -s stable
 RUN /bin/bash -l -c "rvm requirements"
-RUN /bin/bash -l -c "rvm install 2.1.2"
+RUN /bin/bash -l -c "rvm install 2.3.0"
 RUN /bin/bash -l -c "gem install bundler"
-RUN /bin/bash -l -c "rvm use 2.1.2 --default"
+RUN /bin/bash -l -c "rvm use 2.3.0 --default"
 
 ## Add user webs
 RUN adduser webs
