@@ -9,3 +9,8 @@ Nginx + Ruby 2.1.2(rvm) + PostgreSQL and more... Ready for Rails appli, capistra
 nginx_node_webdis
 -----------------
 Nginx + NodeJS + Redis + Webdis (redis as API)
+
+
+smtp_postfix_server
+-------------------
+By http://github.com/catatnight/docker-postfix
