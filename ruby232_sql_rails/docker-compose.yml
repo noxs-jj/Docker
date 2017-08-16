@@ -1,0 +1,16 @@
+rails.container.noxs:
+  build: .
+  privileged: true
+  ports:
+    - "22"
+    - "80"
+    - "3000"
+    - "8080"
+    - "8081"
+    - "8082"
+    - "8083"
+  volumes:
+    - ${ACCESSORIES_PRICE_SERVICE}:/app
+  networks:
+    - docker_localhost
+  command: "/usr/sbin/sshd -D"

@@ -1,9 +1,9 @@
 Docker
 ======
 
-SshNginxPostgresRuby212
+ruby232_sql_rails
 -----------------------
-Nginx + Ruby 2.1.2(rvm) + PostgreSQL and more... Ready for Rails appli, capistrano ...
+Ruby 2.3.2(rvm), PostgreSQL, MySQL, Nginx, ImageMagick and more... Ready for Rails appli, capistrano ...
 
 
 nginx_node_webdis
