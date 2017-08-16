@@ -24,6 +24,6 @@ ADD build_file/debian-transmission/settings.json /var/lib/transmission-daemon/in
 ADD build_file/nginx/default /etc/nginx/sites-enabled/
 
 ## Expose SSH port & and default http
-EXPOSE 22 80 1337 9091 35791
+EXPOSE 22 80 1337 9091 35791 51413
 
 CMD ["/usr/sbin/sshd", "-D"]

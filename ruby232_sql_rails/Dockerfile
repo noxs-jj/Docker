@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y locales \
         libncurses5-dev libpq-dev libreadline6 libreadline6-dev libsqlite3-dev \
         libssl-dev libtool libyaml-dev make nano nginx nodejs openssh-server \
         openssl pkg-config postgresql postgresql-contrib sqlite3 wget zlib1g \
-        zlib1g-dev mysql-server mysql-client libmysqlclient-dev \
+        zlib1g-dev \
     && /bin/bash -l -c  "command curl -sSL https://rvm.io/mpapis.asc | gpg --import -" \
     && \curl -sSL https://get.rvm.io | bash -s stable \
     && /bin/bash -l -c "rvm requirements" \
