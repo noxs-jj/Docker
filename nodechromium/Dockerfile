@@ -1,14 +1,14 @@
-FROM node:10.8.0-alpine
+FROM node:10.12.0-jessie
 
 # install angular-cli as node user
 RUN chown -R node:node /usr/local/lib/node_modules \
   && chown -R node:node /usr/local/bin
 
-USER node
-RUN npm install -g @angular/cli@7.0.2
-
 USER root
 
-# install chromium for headless browser tests
-ENV CHROME_BIN=/usr/bin/chromium-browser
-RUN apk add --no-cache chromium udev ttf-freefont
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | \
+	apt-key add - && echo deb http://dl.google.com/linux/chrome/deb/ \
+	stable main > /etc/apt/sources.list.d/google.list && \
+	apt-get update && apt-get install -y dbus-x11 google-chrome-stable
+
+USER node
